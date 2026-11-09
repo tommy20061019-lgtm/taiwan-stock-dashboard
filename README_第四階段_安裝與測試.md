@@ -1,4 +1,4 @@
-# V3 第四階段｜安裝與測試
+
 
 1. 用 VS Code 開啟**包含 app.py 的資料夾**。
 2. 執行 `python -m pip install -r requirements.txt`。
