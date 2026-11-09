@@ -15,7 +15,7 @@ st.markdown("""
             margin:12px 0 18px 0;color:#ffffff;">
   <div style="font-size:13px;font-weight:700;letter-spacing:2px;color:#f5d47b;">台股資料分析專題</div>
   <div style="font-size:clamp(20px,2.2vw,30px);font-weight:800;line-height:1.5;">
-    王聖凱 <span style="color:#d7e8f9;">｜</span> 寒假轉學申請作品
+    王聖凱 <span style="color:#d7e8f9;">｜</span> 寒假轉學 書審作品
   </div>
 </div>
 """, unsafe_allow_html=True)
