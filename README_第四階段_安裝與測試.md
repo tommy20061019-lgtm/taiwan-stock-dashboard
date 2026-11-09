@@ -1,5 +1,4 @@
 
-
 1. 用 VS Code 開啟**包含 app.py 的資料夾**。
 2. 執行 `python -m pip install -r requirements.txt`。
 3. 執行 `python -m streamlit run app.py`。
