@@ -6,21 +6,21 @@ from chart import make_price_chart, CHART_CONFIG
 from indicators import add_indicators
 from stock_names import display_name
 
-st.set_page_config(page_title="台股小幫手 V3", page_icon="📈", layout="wide")
+st.set_page_config(page_title="台股小幫手", page_icon="📈", layout="wide")
 
-st.title("📈 台股小幫手 V3")
+st.title("📈 台股小幫手")
 st.markdown("""
 <div style="background:linear-gradient(100deg,#1e3a5f,#243b53);border:1px solid #5a8cbd;
             border-left:6px solid #f5c451;border-radius:12px;padding:18px 22px;
             margin:12px 0 18px 0;color:#ffffff;">
-  <div style="font-size:13px;font-weight:700;letter-spacing:2px;color:#f5d47b;">專題作品展示</div>
+  <div style="font-size:13px;font-weight:700;letter-spacing:2px;color:#f5d47b;">台股資料分析專題</div>
   <div style="font-size:clamp(20px,2.2vw,30px);font-weight:800;line-height:1.5;">
-    王聖凱 <span style="color:#d7e8f9;">｜</span> 寒假轉學書審作品
+    王聖凱 <span style="color:#d7e8f9;">｜</span> 寒假轉學申請作品
   </div>
 </div>
 """, unsafe_allow_html=True)
-st.caption("使用 Yahoo Finance 日線資料 · 僅供學習研究與書審展示，不是即時報價或下單軟體")
-with st.expander("🧭 作品功能導覽與使用提醒", expanded=False):
+st.caption("資料來源：Yahoo Finance（日線資料），非即時報價")
+with st.expander("🧭 功能介紹與資料說明", expanded=False):
     st.markdown("""**第一部分｜台股查詢與技術分析**：K 線、成交量、均線、RSI、MACD、KD、自選股與圖片匯出。  
 **第二部分｜股票比較與條件選股**：比較多檔股票的期間漲跌幅，篩選指定股票清單。  
 **第三部分｜投資組合與歷史回測**：模擬持倉損益、均線交叉策略與 CSV 匯出。  
@@ -156,7 +156,7 @@ st.caption("提醒：本程式僅供學習與資訊整理，不構成投資建�
 from analysis_tools import parse_symbols, summarize, make_comparison_chart, screen_rows
 
 st.divider()
-st.header('🔍 V3 第二階段｜股票比較與條件選股')
+st.header('🔍 股票比較與條件選股')
 st.caption('使用 Yahoo Finance 日線資料；僅供學習研究，非即時報價。')
 comparison_tab, screener_tab = st.tabs(['📈 多檔股票比較', '🧮 條件選股'])
 
@@ -272,8 +272,8 @@ from portfolio_backtest import validate_holdings, calculate_portfolio, backtest_
 import plotly.graph_objects as go
 
 st.divider()
-st.header('💼 V3 第三階段｜模擬投資組合與策略回測')
-st.caption('所有計算僅供學習與書審展示，並非真實帳戶或投資建議。報價為最近可取得的日線收盤價。')
+st.header('💼 模擬投資組合與策略回測')
+st.caption('此處為模擬計算，並非真實帳戶或投資建議。報價為最近可取得的日線收盤價。')
 portfolio_tab, backtest_tab = st.tabs(['💰 投資組合與損益', '📉 歷史策略回測'])
 
 with portfolio_tab:
@@ -371,6 +371,6 @@ with backtest_tab:
 
 
 st.divider()
-st.subheader('📚 專題說明與版本資訊')
-st.caption('台股小幫手 V3｜第四階段：作品展示與品質檢查版 · 製作者：王聖凱 · 寒假轉學書審作品')
+st.subheader('📚 資料與計算說明')
+st.caption('台股小幫手 · 製作者：王聖凱')
 st.info('本系統使用第三方歷史日線資料；技術指標、條件選股與策略回測僅供教學與研究，不提供即時交易訊號。')
