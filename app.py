@@ -21,9 +21,9 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.caption("資料來源：Yahoo Finance（日線資料），非即時報價")
 with st.expander("🧭 功能介紹與資料說明", expanded=False):
-    st.markdown("""**第一部分｜台股查詢與技術分析**：K 線、成交量、均線、RSI、MACD、KD、自選股與圖片匯出。  
-**第二部分｜股票比較與條件選股**：比較多檔股票的期間漲跌幅，篩選指定股票清單。  
-**第三部分｜投資組合與歷史回測**：模擬持倉損益、均線交叉策略與 CSV 匯出。  
+    st.markdown("""**台股查詢與技術分析**：K 線、成交量、均線、RSI、MACD、KD、自選股與圖片匯出。  
+**股票比較與條件選股**：比較多檔股票的期間漲跌幅，篩選指定股票清單。  
+**投資組合與歷史回測**：模擬持倉損益、均線交叉策略與 CSV 匯出。  
 **資料說明**：價格取自 Yahoo Finance 最近可取得的日線資料，可能延遲、缺漏；所有模擬結果均非真實交易績效。""")
 
 @st.cache_data(ttl=60)
@@ -111,7 +111,7 @@ with button_col:
 
 m1, m2, m3, m4 = st.columns(4)
 m1.metric("最近收盤價", f"{price:,.2f} 元", f"{change:+,.2f} ({change_pct:+.2f}%)")
-m2.metric("成交量", f"{volume:,} 股")
+m2.metric("成交量", f"{volume / 10000:,.2f} 萬股")
 m3.metric("當日最高", f"{float(latest['High']):,.2f} 元")
 m4.metric("當日最低", f"{float(latest['Low']):,.2f} 元")
 
@@ -125,15 +125,15 @@ if st.button("📷 準備下載圖表圖片（PNG）", key="prepare_chart_png"):
     with st.spinner("正在產生圖表圖片…"):
         try:
             import plotly.io as pio
-            st.session_state["v3_chart_png"] = pio.to_image(chart, format="png", scale=2)
-            st.session_state["v3_chart_png_name"] = symbol.replace(".", "_")
+            st.session_state["chart_png"] = pio.to_image(chart, format="png", scale=2)
+            st.session_state["chart_png_name"] = symbol.replace(".", "_")
         except Exception as exc:
-            st.session_state.pop("v3_chart_png", None)
+            st.session_state.pop("chart_png", None)
             st.error("無法產生 PNG 圖片。請先安裝 Kaleido（python -m pip install kaleido），並確認電腦已安裝 Chrome 瀏覽器。")
             st.caption(f"技術資訊：{exc}")
-if st.session_state.get("v3_chart_png") and st.session_state.get("v3_chart_png_name") == symbol.replace(".", "_"):
-    st.download_button("⬇️ 下載圖表圖片（PNG）", data=st.session_state["v3_chart_png"],
-                       file_name=f"台股小幫手_{st.session_state.get('v3_chart_png_name', '股價')}.png",
+if st.session_state.get("chart_png") and st.session_state.get("chart_png_name") == symbol.replace(".", "_"):
+    st.download_button("⬇️ 下載圖表圖片（PNG）", data=st.session_state["chart_png"],
+                       file_name=f"台股小幫手_{st.session_state.get('chart_png_name', '股價')}.png",
                        mime="image/png", key="download_chart_png")
 
 with st.expander("查看最近 20 個交易日資料"):
@@ -151,7 +151,7 @@ st.divider()
 st.caption("提醒：本程式僅供學習與資訊整理，不構成投資建議。Yahoo Finance 資料可能延遲、缺漏或暫時無法取得；請勿將其視為交易下單依據。")
 
 # ──────────────────────────────────────────────────────────────
-# V3 第二階段：股票比較與指定清單條件選股
+# 股票比較與指定清單條件選股
 # ──────────────────────────────────────────────────────────────
 from analysis_tools import parse_symbols, summarize, make_comparison_chart, screen_rows
 
@@ -266,7 +266,7 @@ with screener_tab:
                 st.error('候選清單均無法取得足夠的日線資料。')
 
 # ──────────────────────────────────────────────────────────────
-# V3 第三階段：投資組合與均線策略回測（模擬用途）
+# 投資組合與均線策略回測（模擬用途）
 # ──────────────────────────────────────────────────────────────
 from portfolio_backtest import validate_holdings, calculate_portfolio, backtest_ma
 import plotly.graph_objects as go

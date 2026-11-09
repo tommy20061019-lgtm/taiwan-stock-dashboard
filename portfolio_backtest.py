@@ -1,4 +1,4 @@
-"""第三階段：模擬持倉計算與無前視偏差的均線策略回測。"""
+"""模擬持倉計算與無前視偏差的均線策略回測。"""
 import pandas as pd
 import numpy as np
 

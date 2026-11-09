@@ -41,7 +41,7 @@ def make_price_chart(data, title: str, indicators=None):
             fig.add_trace(go.Scatter(x=data.index, y=data['D'], name='隨機指標 D 值', hovertemplate='D 值：%{y:.2f}<extra></extra>'), row=row, col=1)
             fig.update_yaxes(range=[0, 100], title_text='KD', row=row, col=1)
     fig.update_layout(title=f'{title}｜股價走勢與技術分析', height=700+180*len(indicators), xaxis_rangeslider_visible=False,
-                      hovermode='x unified', legend={'orientation':'h','y':1.02,'x':0},
+                      hovermode='x unified', showlegend=False,
                       margin={'l':15,'r':15,'t':80,'b':15})
     fig.update_yaxes(title_text='股價（元）', row=1, col=1)
     fig.update_yaxes(title_text='成交量（股）', row=2, col=1)

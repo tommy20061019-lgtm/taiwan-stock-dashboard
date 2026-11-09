@@ -1,4 +1,4 @@
-"""第二階段：多檔股票比較與指定清單條件選股。"""
+"""多檔股票比較與指定清單條件選股。"""
 import pandas as pd
 import plotly.graph_objects as go
 from stock_data import normalize_symbol
