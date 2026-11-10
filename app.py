@@ -108,7 +108,7 @@ m2.metric("成交量", f"{volume / 10000:,.2f} 萬股")
 m3.metric("當日最高", f"{float(latest['High']):,.2f} 元")
 m4.metric("當日最低", f"{float(latest['Low']):,.2f} 元")
 
-st.caption(f"資料日期：{data.index[-1].strftime('%Y-%m-%d')} · 這是最近可取得的日線資料，不保證即時。")
+st.caption(f"這是：{data.index[-1].strftime('%Y-%m-%d')} · 取得的日線資料，並不是即時資料。")
 chart = make_price_chart(data, name, [{"相對強弱指標（RSI）":"RSI", "指數平滑異同移動平均線（MACD）":"MACD", "隨機指標（KD）":"KD"}[item] for item in chosen_indicators])
 st.plotly_chart(chart, use_container_width=True, config=CHART_CONFIG)
 st.caption("圖表操作：拖曳可選取放大範圍、滑鼠滾輪可縮放、雙擊圖表可重設視野。")
