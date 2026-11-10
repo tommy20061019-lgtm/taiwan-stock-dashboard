@@ -354,6 +354,4 @@ with backtest_tab:
 
 
 st.divider()
-st.subheader('📚 資料與計算說明')
 st.caption('台股小幫手 · 製作者：王聖凱')
-st.info('本系統使用第三方歷史日線資料；技術指標、條件選股與策略回測僅供教學與研究，不提供即時交易訊號。')
