@@ -19,13 +19,6 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
-st.caption("資料來源：Yahoo Finance（日線資料），非即時報價")
-with st.expander("🧭 功能介紹與資料說明", expanded=False):
-    st.markdown("""**台股查詢與技術分析**：K 線、成交量、均線、RSI、MACD、KD、自選股與圖片匯出。  
-**股票比較與條件選股**：比較多檔股票的期間漲跌幅，篩選指定股票清單。  
-**投資組合與歷史回測**：模擬持倉損益、均線交叉策略與 CSV 匯出。  
-**資料說明**：價格取自 Yahoo Finance 最近可取得的日線資料，可能延遲、缺漏；所有模擬結果均非真實交易績效。""")
-
 @st.cache_data(ttl=60)
 def load_history(symbol: str, period: str):
     return get_stock_history(symbol, period)
@@ -353,5 +346,3 @@ with backtest_tab:
                 st.error(f'讀取或計算回測資料時發生問題：{exc}')
 
 
-st.divider()
-st.caption('台股小幫手 · 製作者：王聖凱')
