@@ -119,23 +119,6 @@ st.caption(f"資料日期：{data.index[-1].strftime('%Y-%m-%d')} · 這是最�
 chart = make_price_chart(data, name, [{"相對強弱指標（RSI）":"RSI", "指數平滑異同移動平均線（MACD）":"MACD", "隨機指標（KD）":"KD"}[item] for item in chosen_indicators])
 st.plotly_chart(chart, use_container_width=True, config=CHART_CONFIG)
 st.caption("圖表操作：拖曳可選取放大範圍、滑鼠滾輪可縮放、雙擊圖表可重設視野。")
-# 下載 PNG 使用 Kaleido 產生圖片，不再顯示 Plotly 內建英文下載提示。
-# 只有使用者按下按鈕時才嘗試轉圖，避免每次查詢都額外耗時。
-if st.button("📷 準備下載圖表圖片（PNG）", key="prepare_chart_png"):
-    with st.spinner("正在產生圖表圖片…"):
-        try:
-            import plotly.io as pio
-            st.session_state["chart_png"] = pio.to_image(chart, format="png", scale=2)
-            st.session_state["chart_png_name"] = symbol.replace(".", "_")
-        except Exception as exc:
-            st.session_state.pop("chart_png", None)
-            st.error("無法產生 PNG 圖片。請先安裝 Kaleido（python -m pip install kaleido），並確認電腦已安裝 Chrome 瀏覽器。")
-            st.caption(f"技術資訊：{exc}")
-if st.session_state.get("chart_png") and st.session_state.get("chart_png_name") == symbol.replace(".", "_"):
-    st.download_button("⬇️ 下載圖表圖片（PNG）", data=st.session_state["chart_png"],
-                       file_name=f"台股小幫手_{st.session_state.get('chart_png_name', '股價')}.png",
-                       mime="image/png", key="download_chart_png")
-
 with st.expander("查看最近 20 個交易日資料"):
     view = data.tail(20).copy()
     view.index = view.index.strftime("%Y-%m-%d")
