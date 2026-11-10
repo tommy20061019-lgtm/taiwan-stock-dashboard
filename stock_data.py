@@ -24,6 +24,7 @@ def get_stock_history(symbol: str, period: str = "1y") -> pd.DataFrame:
         ticker = yf.Ticker(candidate)
         data = ticker.history(period=period, interval="1d", auto_adjust=True)
         if not data.empty:
+            print(f"{candidate} 最新資料日期：{data.index[-1]}")
             data = data.rename_axis("Date")
             data = data[["Open", "High", "Low", "Close", "Volume"]].dropna(subset=["Close"])
             data["MA5"] = data["Close"].rolling(5).mean()
